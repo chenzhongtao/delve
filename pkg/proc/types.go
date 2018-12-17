@@ -12,6 +12,7 @@ import (
 	"go/token"
 	"path/filepath"
 	"reflect"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -57,6 +58,10 @@ const (
 
 // Do not call this function directly it isn't able to deal correctly with package paths
 func (bi *BinaryInfo) findType(name string) (godwarf.Type, error) {
+	//fmt.Println(name)
+	re := regexp.MustCompile("\\s+")
+	name = string(re.ReplaceAll([]byte(name),[]byte("")))
+	//fmt.Println(name)
 	off, found := bi.types[name]
 	if !found {
 		return nil, reader.TypeNotFoundErr
