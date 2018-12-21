@@ -6,6 +6,7 @@ import (
 	"go/ast"
 	"io"
 
+	"github.com/Sirupsen/logrus"
 	"github.com/derekparker/delve/pkg/proc"
 )
 
@@ -486,6 +487,7 @@ func (p *Process) SwitchThread(tid int) error {
 func (p *Process) ThreadList() []proc.Thread {
 	r := make([]proc.Thread, 0, len(p.Threads))
 	for _, v := range p.Threads {
+		logrus.Debugf("%+v", v)
 		r = append(r, v)
 	}
 	return r

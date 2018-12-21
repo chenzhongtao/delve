@@ -592,6 +592,7 @@ func (p *Process) FindThread(threadID int) (proc.Thread, bool) {
 func (p *Process) ThreadList() []proc.Thread {
 	r := make([]proc.Thread, 0, len(p.threads))
 	for _, thread := range p.threads {
+		logrus.Debugf("%+v",thread)
 		r = append(r, thread)
 	}
 	return r
